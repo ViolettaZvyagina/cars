@@ -19,7 +19,7 @@ export class AppComponent {
   constructor(private fb: FormBuilder, private appService: AppService) {
   }
   ngOnInit() {
-    this.appService.getData().subscribe(carsData => this.carsData= carsData);
+    this.appService.getData(this.category).subscribe(carsData => this.carsData = carsData);
   }
 
   goScroll(target: HTMLElement, car?: any) {
@@ -27,6 +27,12 @@ export class AppComponent {
     if (car) {
       this.priceForm.patchValue({car: car.name});
     }
+  }
+
+  category: string = 'sport';
+  toggleCategory(category: string) {
+    this.category = category;
+    this.ngOnInit();
   }
 
   trans: any;
